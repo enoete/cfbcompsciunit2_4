@@ -244,6 +244,10 @@ footer a{color:var(--hot)}
     <p class="sub" style="margin-bottom:6px">Six short project briefs. Pick the model that fits best and see why — or why not.</p>
     <div id="modelMatch"></div>
   </div>
+
+  <div class="note">
+    <b>🛰️ Real-world check:</b> which model is Starlink itself actually following? Not Waterfall — there was no way to fully specify "satellite internet for the whole planet" up front in 2015. In practice it reads as <b>Evolutionary Development</b>: an initial working version launched and sold, then genuinely new hardware generations (v1.0 → v1.5 → v2 Mini, laser inter-satellite links added later) released as real-world use — including Ukraine — surfaced requirements nobody wrote down at the start. You'll see the rest of this Starlink thread in the Feasibility and Requirements sections below.
+  </div>
 </div></section>
 
 <!-- ============================ FEASIBILITY ============================ -->
@@ -266,6 +270,17 @@ footer a{color:var(--hot)}
       <tr style="border-bottom:1px solid var(--grid)"><td style="padding:6px"><b>Operational</b></td><td style="padding:6px">Will it actually work inside how the organisation runs day to day?</td></tr>
       <tr><td style="padding:6px"><b>Schedule</b></td><td style="padding:6px">Can it be delivered in the time available?</td></tr>
     </table>
+  </div>
+
+  <div class="note">
+    <b>🛰️ Real-world check: Starlink.</b> SpaceX didn't skip this step just because it's SpaceX — Starlink failed or barely passed feasibility in several places before a single satellite flew.
+    <ul style="margin:8px 0 0;padding-left:20px">
+      <li><b>Technical:</b> borderline at best in 2015. Putting broadband-grade antennas on thousands of small satellites, and building a terminal a customer could point at the sky themselves with no technician, hadn't been done at that scale. The one thing that tipped it into "yes": SpaceX already owned a reusable rocket (Falcon 9), which nobody else building a satellite constellation did.</li>
+      <li><b>Economic:</b> a genuinely enormous bet — tens of billions of dollars before meaningful revenue, on a plan to launch over 10,000 satellites eventually. The economics only work because reusable launches cut the cost per satellite dramatically, and because tens of millions of homes worldwide have no other broadband option and will pay for one.</li>
+      <li><b>Legal:</b> this is the one that nearly didn't pass. Operating a satellite network needs spectrum and orbital-slot approval from national regulators (the FCC in the US) and coordination through the ITU internationally, country by country, plus formal objections from astronomers over satellite brightness and from rival satellite operators over interference — none of that is solved by good engineering.</li>
+      <li><b>Operational:</b> could a car-and-rocket company actually mass-manufacture satellites and ground terminals, and support customers, at consumer scale? Early on, the answer was "not quite" — terminal supply couldn't keep up with demand, and new customers sat on waitlists for months.</li>
+      <li><b>Schedule:</b> not optional. The FCC licence itself sets hard deadlines — roughly half the approved satellites had to be in orbit within six years of approval, the rest within nine, or the licence could be clawed back. That's a feasibility constraint written directly into the regulation, not a project-management nicety.</li>
+    </ul>
   </div>
 
   <div class="card">
@@ -291,6 +306,13 @@ footer a{color:var(--hot)}
     <div id="elicitMatch"></div>
   </div>
 
+  <div class="note">
+    <b>🛰️ Real-world check: Starlink's requirements.</b>
+    <p style="margin:8px 0 0">Some of the original <b>functional</b> requirements: the terminal ("Dishy") has to find and lock onto satellites with zero setup from the customer — no technician, no manual aiming. As satellites race overhead at roughly 27,000 km/h, the terminal has to hand off from one satellite to the next without the connection dropping. The service has to work from a fixed registered location.</p>
+    <p style="margin:8px 0 0">Some of the original <b>non-functional</b> requirements: latency low enough to feel like ordinary broadband — roughly 20–40 milliseconds, against 600+ milliseconds for older geostationary satellite internet — plus a terminal cheap enough, and a signal reliable enough through weather, for ordinary households to actually buy it.</p>
+    <p style="margin:8px 0 0"><b>Where elicitation actually happened:</b> market research and pre-order demand in underserved rural areas validated that the need was real before full build-out. Then real use did something elicitation on paper never could — in 2022, when Starlink terminals were deployed in Ukraine, soldiers and civilians needed the service to survive electronic jamming and keep working while moving, a requirement nobody had written down in 2015 because the original customer was a rural household, not a combat zone. That's requirements elicitation continuing <i>after</i> launch, not something that only happens once at the start — exactly why models like Evolutionary Development exist.</p>
+  </div>
+
   <div class="note good">
     <b>Verification vs validation — the exam's favourite trap:</b> Verification asks <i>"are we building the product right?"</i> (does it match the spec we wrote). Validation asks <i>"are we building the right product?"</i> (does it actually solve the user's real problem). You can pass verification and still fail validation — a system can perfectly match a spec that was wrong from the start.
   </div>
@@ -311,11 +333,11 @@ footer a{color:var(--hot)}
 <!-- ============================ CASE STUDIES ============================ -->
 <section id="cases"><div class="wrap">
   <div class="tag" style="background:var(--case)">🎓 CAPSTONE</div>
-  <h2>Three systems. You're the analyst.</h2>
-  <p class="sub">Everything above, used for real. For each system: spot the feasibility concern, pick and justify an SDLC model, and sort its requirements. Immediate feedback on every call.</p>
+  <h2>Four systems. One of them is flying over your head right now.</h2>
+  <p class="sub">Everything above, used for real. For each system: spot the feasibility concern, pick and justify an SDLC model, and sort its requirements. Immediate feedback on every call. The first one isn't invented for this lesson — it's Starlink's actual history.</p>
   <div id="caseStudies"></div>
-  <div class="note">
-    <b>Want more?</b> This capstone is deliberately three deep, not five — for the full five-case discussion set (banking, social media, medical dispatch, LMS, smart home), carry on to <a href="https://enoete.github.io/cfbcompsciu2_4/" target="_blank" rel="noopener">the extended case studies</a>.
+  <div class="note good">
+    <b>Want five more to argue about in groups?</b> Banking, social media, medical dispatch, a university LMS and a smart home — a fuller discussion-question set (no self-check, built for class debate) lives at <a href="https://enoete.github.io/cfbcompsciu2_4/" target="_blank" rel="noopener">the extended case studies</a>.
   </div>
 </div></section>
 
@@ -848,6 +870,18 @@ const MODELS = [
 
 /* ---------------- CASE STUDY CAPSTONE ---------------- */
 const CASES = [
+  {title:'Starlink — Satellite Internet (the real one)', real:true,
+   scenario:'SpaceX\'s Starlink constellation needs to launch, operate and sell service from thousands of low-orbit satellites. To do that legally anywhere, it has to secure radio spectrum and orbital-slot approval country by country, coordinate internationally through the ITU so it doesn\'t interfere with existing satellite operators, and has already faced formal objections from astronomers over satellite brightness and from rival operators over interference.',
+   feasOptions:['Technical','Legal','Operational','Economic'], feasCorrect:'Legal',
+   feasWhy:'Spectrum, orbital-slot approval and formal objections from astronomers and competitors are a regulatory and legal problem — no amount of good engineering solves it on its own.',
+   modelOptions:['Waterfall','Evolutionary Development','Formal Transformation','Reuse-Oriented Development'], modelCorrect:'Evolutionary Development',
+   modelWhy:'The full requirements for "satellite internet for the whole planet" couldn\'t be known in 2015. Real versions shipped (v1.0, v1.5, v2 Mini) and real-world use — including Ukraine in 2022 — kept surfacing requirements nobody had written down at the start.',
+   reqItems:[
+     {id:'s1', label:'Let the terminal find and lock onto a satellite with no technician needed.', bin:'F'},
+     {id:'s2', label:'Hand off from one satellite to the next without dropping the connection.', bin:'F'},
+     {id:'s3', label:'Deliver latency low enough to feel like ordinary home broadband (roughly 20–40ms).', bin:'N'},
+     {id:'s4', label:'Keep working through jamming and while physically moving, in a conflict zone.', bin:'N'}
+   ]},
   {title:'GreenCart — Farmers\' Market Ordering App',
    scenario:'A local farmers\' market wants an app so customers can order fresh produce for pickup. Most of the vendors are older farmers who have never used a smartphone and are nervous about learning a new system. Nobody — including the vendors — is fully sure what the ordering screen should look like yet.',
    feasOptions:['Technical','Economic','Operational','Schedule'], feasCorrect:'Operational',
@@ -888,8 +922,8 @@ const CASES = [
 (function(){
   const host = $('#caseStudies'); if(!host) return;
   host.innerHTML = CASES.map((c,i)=>`
-    <div class="casecard">
-      <span class="casetag">CASE ${i+1}</span>
+    <div class="casecard" ${c.real?'style="border-width:3px;box-shadow:0 0 0 3px var(--case-s)"':''}>
+      <span class="casetag" ${c.real?'style="background:#0E6E8C"':''}>${c.real ? '🛰️ THIS ONE IS REAL' : 'CASE '+i}</span>
       <h3>${esc(c.title)}</h3>
       <p>${esc(c.scenario)}</p>
       <div class="casestep">
